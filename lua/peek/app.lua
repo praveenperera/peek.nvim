@@ -1,4 +1,5 @@
 local config = require('peek.config')
+local util = require('peek.util')
 
 local chansend = vim.fn.chansend
 local concat = table.concat
@@ -27,9 +28,15 @@ end
 
 function module.setup()
   local sep = vim.loop.os_uname().sysname:match('Windows') and '\\' or '/'
+  local theme = config.get('theme')
+
+  if config.get('auto_os_theme') then
+    theme = util.get_theme()
+  end
+
   local args = {
     '--logfile=' .. string.format('%s%speek.log', vim.fn.stdpath('log'), sep),
-    '--theme=' .. config.get('theme'),
+    '--theme=' .. theme,
     '--app=' .. vim.json.encode(config.get('app')),
   }
 
