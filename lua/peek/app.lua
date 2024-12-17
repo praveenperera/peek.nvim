@@ -26,11 +26,12 @@ local function message(chunks)
   end, chunks))
 end
 
-function module.setup()
+function module.setup(cfg)
+  local cfg = cfg or {}
   local sep = vim.loop.os_uname().sysname:match('Windows') and '\\' or '/'
-  local theme = config.get('theme')
+  local theme = cfg['theme'] or config.get('theme')
 
-  if config.get('auto_os_theme') then
+  if cfg['auto_os_theme'] or config.get('auto_os_theme') then
     theme = util.get_theme()
   end
 
