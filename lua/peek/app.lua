@@ -32,7 +32,7 @@ function module.setup(cfg)
   local theme = cfg['theme'] or config.get('theme')
 
   if cfg['auto_os_theme'] or config.get('auto_os_theme') then
-    theme = util.get_theme()
+    theme = util.get_color_scheme()
   end
 
   local args = {
